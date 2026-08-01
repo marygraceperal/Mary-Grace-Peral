@@ -19,7 +19,7 @@
             color: var(--text-main);
             background-color: var(--body-bg);
             margin: 0;
-            padding: 40px;
+            padding: 15px;
         }
 
         .container {
@@ -35,44 +35,42 @@
         .cover-header {
             background-color: var(--header-bg);
             color: var(--text-light);
-            padding: 40px;
+            padding: 30px 25px;
             border-bottom: 5px solid #00457A;
         }
 
         .cover-header h1 {
             margin: 0;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
 
         .cover-header p {
-            margin: 10px 0 0 0;
-            font-size: 16px;
+            margin: 8px 0 0 0;
+            font-size: 15px;
             opacity: 0.9;
         }
 
         .cover-body {
-            padding: 50px;
+            padding: 25px;
         }
 
+        /* Responsive Contact Info Layout */
         .contact-info {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
             font-size: 14px;
             color: #555;
         }
 
-        .contact-info div {
-            width: 48%;
-        }
-
         .contact-info p {
             margin: 4px 0;
+            word-wrap: break-word;
         }
 
-        /* --- Clickable Portfolio Link Styling --- */
         .contact-info a {
             color: #005A9C;
             text-decoration: none;
@@ -81,6 +79,29 @@
 
         .contact-info a:hover {
             text-decoration: underline;
+        }
+
+        /* Desktop Layout Override */
+        @media (min-width: 600px) {
+            body {
+                padding: 40px;
+            }
+            .cover-header {
+                padding: 40px;
+            }
+            .cover-header h1 {
+                font-size: 32px;
+            }
+            .cover-body {
+                padding: 50px;
+            }
+            .contact-info {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .contact-info div {
+                width: 48%;
+            }
         }
 
         .date {
@@ -103,7 +124,7 @@
 
         ul {
             margin-bottom: 20px;
-            padding-left: 25px;
+            padding-left: 20px;
         }
 
         li {
@@ -111,7 +132,7 @@
         }
 
         .signature {
-            margin-top: 50px;
+            margin-top: 40px;
         }
 
         .signature p {
@@ -151,7 +172,7 @@
                 <p>Purok-5 Lower Bonbon, Butuan City</p>
                 <p>+639506381725</p>
                 <p>marygraceperal@gmail.com</p>
-                <p><a href="https://drive.google.com/drive/folders/1DXw9OlYIK23htg1ZtfYNo3eZeb4jd?usp=sharing" target="_blank">My Professional Portfolio</a></p>
+                <p><a href="https://marygraceperal.github.io/Mary-Grace-Peral/index.html" target="_blank">My Professional Portfolio</a></p>
             </div>
             <div>
                 <strong>To:</strong>
