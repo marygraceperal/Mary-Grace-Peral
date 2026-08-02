@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum Vitae - Mary Grace M. Peral </title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 20px;
+  }
+  .container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  header {
+    border-bottom: 3px solid #2b6cb0;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+  }
+  .header-details {
+    width: 100%;
+  }
+  h1 {
+    color: #1a365d;
+    font-size: 24pt;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    color: #2b6cb0;
+    font-size: 12pt;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+  }
+  .contact-info {
+    font-size: 9.5pt;
+    color: #4a5568;
+    line-height: 1.5;
+  }
+  h2 {
+    color: #1a365d;
+    font-size: 13pt;
+    border-bottom: 1.5px solid #cbd5e0;
+    padding-bottom: 4px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  h3 {
+    color: #2d3748;
+    font-size: 11pt;
+    margin-top: 14px;
+    margin-bottom: 2px;
+  }
+  .job-meta {
+    font-style: italic;
+    color: #4a5568;
+    font-size: 9.5pt;
+    margin-bottom: 8px;
+  }
+  p {
+    margin: 6px 0;
+    font-size: 10pt;
+  }
+  ul {
+    margin-top: 6px;
+    margin-bottom: 12px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 5px;
+    font-size: 10pt;
+  }
+  .reg-box {
+    background-color: #ebf8ff;
+    border-left: 4px solid #3182ce;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 0 4px 4px 0;
+  }
+  .reg-box ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  a {
+    color: #2b6cb0;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="header-details">
+      <h1>Mary Grace M. Peral</h1>
+      <div class="subtitle">Secondary Mathematics Teacher | Teacher Registration &amp; Placement Specialist</div>
+      <div class="contact-info">
+        <strong>Address:</strong> Purok 5, Lower Bonbon, Butuan City, Agusan del Norte, Philippines 8600<br>
+        <strong>Phone:</strong> +63 950 638 1725 / +63 926 713 3776 | <strong>Email:</strong> marygraceperal@gmail.com<br>
+        <strong>Online Portfolio:</strong> <a href="https://marygraceperal.github.io/Mary-Grace-Peral/" target="_blank">marygraceperal.github.io/Mary-Grace-Peral</a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Teacher Registration &amp; Official Standing</h2>
+    <div class="reg-box">
+      <ul>
+        <li><strong>NZ Teaching Council Status:</strong> Application in Progress / Registered Secondary Mathematics Teacher (Secondary - Mathematics)</li>
+        <li><strong>NZQA International Qualifications Assessment (IQA):</strong> Completed / Assessed Level 7 Equivalent</li>
+        <li><strong>PRC Philippines Professional License:</strong> Licensed Professional Teacher (Secondary - Mathematics)</li>
+        <li><strong>PRC Board Rating &amp; Good Standing:</strong> Certified Board Examination Passer with active Certificate of Good Standing</li>
+        <li><strong>CAV Credentials:</strong> Certification, Authentication, and Verification (CAV) issued by DepEd/CHED</li>
+        <li><strong>English Language Proficiency:</strong> Academic IELTS Results Certified</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Personal Statement &amp; Teaching Philosophy</h2>
+    <p>Dedicated, high-performing Licensed Secondary Mathematics Teacher with 17 years of classroom teaching experience specializing in Junior High and Grade 11 &amp; 12 Senior High School Mathematics. Graduated <em>Cum Laude</em> with a BSEd in Mathematics and holding an Outstanding IPCRF performance rating of 4.428. Guided by the philosophy that effective pedagogy requires patience, clear scaffolding, and deep care for student success (<em>Manaakitanga</em>). Experienced in curriculum localization, ethnomathematics, and modern digital classroom tools. Fully committed to delivering inclusive, high-quality NCEA-aligned mathematics education in New Zealand.</p>
+  </section>
+
+  <section>
+    <h2>Curriculum Strengths &amp; Key Skills</h2>
+    <ul>
+      <li><strong>Subject Expertise:</strong> Senior High School Algebra, General Mathematics, Statistics &amp; Probability, Geometry, and Junior High Mathematics (NCEA strand equivalent mastery)</li>
+      <li><strong>Pedagogy &amp; Assessment:</strong> Differentiated instruction, ethnomathematics, lesson localization, formative/summative assessment design, NCEA learning outcome design</li>
+      <li><strong>Digital Fluency &amp; Classroom Tech:</strong> Progressive Web App (PWA) classroom management tools, Microsoft 365, Copilot AI-assisted teaching, digital portfolio development</li>
+      <li><strong>Leadership &amp; Mentorship:</strong> Institutional Training Chair, Grade 12 Class Adviser, Work Immersion Focal Person, Regional Demonstration Teacher</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Teaching &amp; Professional Experience</h2>
+
+    <h3>Secondary Teacher II / Mathematics Lead (Senior &amp; Junior High School)</h3>
+    <div class="job-meta">Department of Education (DepEd) — Pareja Integrated School | 2017 – Present (Butuan City, Philippines)</div>
+    <ul>
+      <li>Deliver core and specialized mathematics courses (Statistics &amp; Probability, General Mathematics, Algebra) under the Senior High School K-12 framework.</li>
+      <li>Serve as Grade 12 Class Adviser, guiding students through academic progression and career pathway preparation.</li>
+      <li>Act as School Training Chair, organizing, facilitating, and evaluating professional development programs and Teacher Learning Action Cells.</li>
+      <li>Pioneer localized lesson plans incorporating local economic and cultural contexts to make abstract mathematical concepts relatable.</li>
+      <li>Achieved an Outstanding performance review rating (IPCRF: 4.428) for SY 2024–2025.</li>
+    </ul>
+
+    <h3>Secondary Mathematics Teacher (Junior High School)</h3>
+    <div class="job-meta">Department of Education (DepEd) — Manila De Bugabus Integrated School | 2013 – 2017 (Philippines)</div>
+    <ul>
+      <li>Taught Grades 7–10 Mathematics focusing on foundational algebraic thinking, geometry, and problem-solving.</li>
+      <li>Selected as Regional Demonstration Teacher (2015), modeling best practices in Grade 10 Mathematics pedagogy to regional educators.</li>
+      <li>Collaborated with school leadership on curriculum mapping, student remediation strategies, and extracurricular academic events.</li>
+    </ul>
+
+    <h3>College Instructor &amp; High School Teacher</h3>
+    <div class="job-meta">Butuan City Colleges | 2011 – 2012 (Butuan City, Philippines)</div>
+    <ul>
+      <li>Taught College Algebra, Business Mathematics, and Geometry to post-secondary students.</li>
+      <li>Facilitated cross-functional learning in foundational secondary science subjects.</li>
+    </ul>
+
+    <h3>Foundational Secondary Mathematics Teacher</h3>
+    <div class="job-meta">Basic Education / Private School Teaching | 2009 – 2011 (Philippines)</div>
+    <ul>
+      <li>Facilitated basic mathematics instruction and designed student-centered lesson plans and assessment tools.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Teaching Placements &amp; Internships</h2>
+    <h3>Teaching Practicum (Student Teaching Internship)</h3>
+    <div class="job-meta">Father Saturnino Urios University / Partner Secondary Schools | 2008 – 2009</div>
+    <ul>
+      <li>Completed full-semester intensive teaching practicum in secondary mathematics classroom settings.</li>
+      <li>Gained hands-on experience in lesson design, classroom delivery, formative assessment, and diverse student cohort management.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Education &amp; Academic Qualifications</h2>
+    <h3>Bachelor of Secondary Education (BSEd), Major in Mathematics</h3>
+    <div class="job-meta">Father Saturnino Urios University (PAASCU Accredited) — Graduated 2009</div>
+    <ul>
+      <li><strong>Academic Honor:</strong> Graduated <em>Cum Laude</em></li>
+      <li><strong>Specialized Coursework:</strong> Completed 50+ units of specialized mathematics (College Algebra, Trigonometry, Calculus, Geometry, Statistics) and professional education pedagogy.</li>
+      <li><strong>Official Documentation:</strong> Official Transcript of Records (TOR), Course Descriptions, and CAV Authentication complete.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Professional Development &amp; Training Highlights</h2>
+    <ul>
+      <li><strong>2024 – 2026:</strong> Advanced Instructional Leadership, DCP Microsoft 20-Hour Adoption (Copilot, Teams), and Basic Occupational Safety &amp; Health (BOSH SO1).</li>
+      <li><strong>2020 – 2023:</strong> Digital Educational Technology, Mobile App Development for Classroom Use, International Problem Solving Coaching.</li>
+      <li><strong>2015 – 2019:</strong> K-12 Senior High School Mathematics Specialization, DAMATH Math Coach (1st Place District Champion).</li>
+      <li><strong>2009 – 2014:</strong> Ethnomathematics &amp; Culturally Relevant STEM Pedagogy, Foundational Curriculum Alignment.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Community Leadership &amp; Cultural Connection</h2>
+    <ul>
+      <li><strong>Community Environmental Leadership:</strong> Spearheaded environmental guardianship initiatives (<em>Kaitiakitanga</em>), including "Operation Pulot Kalat" and school reforestation projects.</li>
+      <li><strong>Literacy &amp; Community Outreach:</strong> Contributor to structured reading integration in Mathematics and coordinator for community feeding programs.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Referees</h2>
+    <p>Professional references from DepEd Principals and Academic Supervisors are available to be viewed in my <a href="https://drive.google.com/file/d/1s2rs5gbMBZfqyAoEh3Fk9Q2kwKp2Jzlc/view?usp=sharing" target="_blank">Professional References Document</a> within my online <a href="https://marygraceperal.github.io/Mary-Grace-Peral/" target="_blank">Professional Portfolio</a>, or available upon request.</p>
+  </section>
+</div>
+
+</body>
+</html>
