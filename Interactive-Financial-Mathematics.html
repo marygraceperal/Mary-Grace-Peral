@@ -1,53 +1,719 @@
-<!-- UPDATED SIMPLE INTEREST CARD -->
-<div class="card animate-on-scroll">
-    <div class="card-title">
-        <span>Simple Interest (Future Value)</span>
-        <button class="interactive-btn" onclick="toggleCalc('calc_simple')">Try Live Calc</button>
-    </div>
-    <div class="formula-box">
-        <span class="math">FV = P(1 + r · t)</span>
-    </div>
-    <p class="usage-text"><strong>When to use:</strong> Calculate the future balance of a lump sum earning linear interest strictly on the initial principal (<em>P</em>).</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Financial Mathematics Guide</title>
+    <style>
+        :root {
+            --primary: #0284C7;
+            --primary-light: #E0F2FE;
+            --secondary: #4F46E5;
+            --secondary-light: #EEF2FF;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --card-border: #E2E8F0;
+            --text-main: #0F172A;
+            --text-sub: #475569;
+            --accent-green: #059669;
+            --accent-green-bg: #ECFDF5;
+            --accent-amber: #D97706;
+        }
 
-    <div id="calc_simple" class="calc-panel">
-        <div class="calc-grid">
-            <div class="calc-field"><label>Principal (P)</label><input type="number" id="cs_p" value="20000" oninput="calcSimple()"></div>
-            <div class="calc-field"><label>Annual Rate % (r)</label><input type="number" step="0.1" id="cs_r" value="5" oninput="calcSimple()"></div>
-            <div class="calc-field"><label>Years (t)</label><input type="number" id="cs_t" value="3" oninput="calcSimple()"></div>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER ANIMATIONS */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid rgba(2, 132, 199, 0.2);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 10px rgba(2, 132, 199, 0.1);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin: 0 0 10px 0;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0284C7 0%, #4F46E5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-sub);
+            font-size: 16px;
+            margin: 0;
+        }
+
+        /* SECTION HEADINGS */
+        h2 {
+            font-size: 22px;
+            color: var(--text-main);
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+            margin: 40px 0 20px 0;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: fadeInLeft 0.6s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        /* CARDS & HOVER ANIMATIONS */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.01);
+            border-color: rgba(2, 132, 199, 0.4);
+            box-shadow: 0 12px 25px rgba(2, 132, 199, 0.12);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .formula-box {
+            background: var(--primary-light);
+            border: 1px solid rgba(2, 132, 199, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .formula-box {
+            border-color: var(--primary);
+            background: #D9F2FE;
+            box-shadow: inset 0 0 10px rgba(2, 132, 199, 0.08);
+        }
+
+        .math {
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 1.25em;
+            color: #0369A1;
+            letter-spacing: 0.5px;
+        }
+
+        .usage-text {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin: 12px 0;
+        }
+
+        .example-box {
+            background: #F1F5F9;
+            border: 1px dashed var(--card-border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 14px;
+            font-size: 14px;
+        }
+
+        .calculation-line {
+            background: var(--accent-green-bg);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+            color: #047857;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* INTERACTIVE CALCULATOR TOGGLE */
+        .interactive-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, #0369A1 100%);
+            color: #FFF;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
+        }
+
+        .interactive-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+        }
+
+        .calc-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+            background: #F1F5F9;
+            border-radius: 8px;
+            margin-top: 12px;
+            padding: 0 16px;
+        }
+
+        .calc-panel.active {
+            max-height: 250px;
+            padding: 16px;
+            border: 1px solid var(--primary);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .calc-field label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .calc-field input {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .calc-result {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-amber);
+            text-align: right;
+        }
+
+        /* DISCUSSION SECTION */
+        .discussion-section {
+            background: linear-gradient(135deg, var(--accent-green-bg) 0%, var(--primary-light) 100%);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+            border-radius: 12px;
+            padding: 28px;
+            margin-top: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* TABLE STYLING */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            font-size: 14px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        th {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* KEYFRAME ANIMATIONS */
+        @keyframes fadeInDown {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-visible {
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <span class="badge">Grade 11 General Mathematics</span>
+        <h1>Financial Mathematics: Interactive Guide</h1>
+        <p>Sequences, Series, Simple Interest, Compound Interest & Annuities</p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <h2>1. Arithmetic Sequences & Series</h2>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Arithmetic Sequence (n-th Term)</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc_arith_seq')">Try Live Calc</button>
         </div>
-        <div class="calc-result" id="cs_res">Interest: ₱3,000.00 | Future Value: ₱23,000.00</div>
+        <div class="formula-box">
+            <span class="math">a<sub>n</sub> = a<sub>1</sub> + (n − 1)d</span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Calculate a specific term in a sequence that increases or decreases by a constant common difference (<em>d</em>) at equal steps.</p>
+
+        <div id="calc_arith_seq" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>a1 (First Term)</label><input type="number" id="cas_a1" value="5000" oninput="calcArithSeq()"></div>
+                <div class="calc-field"><label>d (Difference)</label><input type="number" id="cas_d" value="500" oninput="calcArithSeq()"></div>
+                <div class="calc-field"><label>n (Period)</label><input type="number" id="cas_n" value="6" oninput="calcArithSeq()"></div>
+            </div>
+            <div class="calc-result" id="cas_res">Result: a<sub>6</sub> = 7,500.00</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            A worker starts with a monthly salary of ₱5,000 (<span class="math">a<sub>1</sub> = 5,000</span>) and receives an annual fixed step increment of ₱500 (<span class="math">d = 500</span>). Salary in <strong>Year 6</strong> (<span class="math">n = 6</span>):
+            <div class="calculation-line">a<sub>6</sub> = 5,000 + (6 − 1)(500) = ₱7,500.00</div>
+        </div>
     </div>
 
-    <div class="example-box">
-        <strong>Real-World Example:</strong><br>
-        Depositing <strong>₱20,000</strong> (<span class="math">P = 20,000</span>) at 5% simple annual interest (<span class="math">r = 0.05</span>) for 3 years (<span class="math">t = 3</span>):
-        <div class="calculation-line">FV = 20,000 × (1 + 0.05 × 3) = ₱23,000.00</div>
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Sum of a Finite Arithmetic Series</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc_arith_sum')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">S<sub>n</sub> = [ n (a<sub>1</sub> + a<sub>n</sub>) ] / 2 &nbsp;&nbsp;or&nbsp;&nbsp; S<sub>n</sub> = [ n (2a<sub>1</sub> + (n − 1)d) ] / 2</span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Find the total cumulative sum of all terms in an arithmetic sequence across <em>n</em> periods.</p>
+
+        <div id="calc_arith_sum" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>a1 (First Term)</label><input type="number" id="casum_a1" value="5000" oninput="calcArithSum()"></div>
+                <div class="calc-field"><label>d (Difference)</label><input type="number" id="casum_d" value="500" oninput="calcArithSum()"></div>
+                <div class="calc-field"><label>n (Terms)</label><input type="number" id="casum_n" value="6" oninput="calcArithSum()"></div>
+            </div>
+            <div class="calc-result" id="casum_res">Result: S<sub>6</sub> = 37,500.00</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            Total cumulative earnings over 6 years with initial ₱5,000 salary and ₱500 annual increment:
+            <div class="calculation-line">S<sub>6</sub> = [ 6 × (2(5,000) + (6 − 1)(500)) ] / 2 = ₱37,500.00</div>
+        </div>
     </div>
+
+    <!-- SECTION 2 -->
+    <h2>2. Geometric Sequences & Series</h2>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Geometric Sequence (n-th Term)</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc1')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">a<sub>n</sub> = a<sub>1</sub> · r<sup>n−1</sup></span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Calculate a specific single term in a sequence that grows or decays by a constant multiplier ratio (<em>r</em>).</p>
+        
+        <div id="calc1" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>a1 (First Term)</label><input type="number" id="c1_a1" value="10000" oninput="calcSeq()"></div>
+                <div class="calc-field"><label>r (Ratio)</label><input type="number" step="0.01" id="c1_r" value="1.05" oninput="calcSeq()"></div>
+                <div class="calc-field"><label>n (Period)</label><input type="number" id="c1_n" value="5" oninput="calcSeq()"></div>
+            </div>
+            <div class="calc-result" id="c1_res">Result: a<sub>5</sub> = 12,155.06</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            A company starts production at 10,000 units in Year 1 (<span class="math">a<sub>1</sub> = 10,000</span>) with a 5% yearly increase (<span class="math">r = 1.05</span>). Target output for <strong>Year 5</strong> (<span class="math">n = 5</span>):
+            <div class="calculation-line">a<sub>5</sub> = 10,000 × (1.05)<sup>4</sup> = 12,155.06 units</div>
+        </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Sum of a Finite Geometric Series</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc_sum')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">S<sub>n</sub> = [ a<sub>1</sub> (1 − r<sup>n</sup>) ] / (1 − r)</span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Compute the cumulative sum of all terms in a geometric sequence from period 1 to <em>n</em>.</p>
+        
+        <div id="calc_sum" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>a1 (First Term)</label><input type="number" id="csum_a1" value="10000" oninput="calcSum()"></div>
+                <div class="calc-field"><label>r (Ratio)</label><input type="number" step="0.01" id="csum_r" value="1.05" oninput="calcSum()"></div>
+                <div class="calc-field"><label>n (Terms)</label><input type="number" id="csum_n" value="5" oninput="calcSum()"></div>
+            </div>
+            <div class="calc-result" id="csum_res">Result: S<sub>5</sub> = 55,256.31</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            Total cumulative production across all 5 years combined (<span class="math">a<sub>1</sub> = 10,000</span>, <span class="math">r = 1.05</span>):
+            <div class="calculation-line">S<sub>5</sub> = [ 10,000 × (1 − 1.05<sup>5</sup>) ] / (1 − 1.05) = 55,256.31 units</div>
+        </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <h2>3. Simple Interest & Future Value</h2>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Simple Interest (Interest & Future Value)</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc_simple')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">I = P · r · t &nbsp;&nbsp;|&nbsp;&nbsp; FV = P(1 + r · t)</span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Calculate linear interest (<em>I</em>) or total Future Value (<em>FV</em>) charged/earned strictly on the original principal balance (<em>P</em>) over time (<em>t</em> in years).</p>
+
+        <div id="calc_simple" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>Principal (P)</label><input type="number" id="cs_p" value="20000" oninput="calcSimple()"></div>
+                <div class="calc-field"><label>Annual Rate % (r)</label><input type="number" step="0.1" id="cs_r" value="5" oninput="calcSimple()"></div>
+                <div class="calc-field"><label>Years (t)</label><input type="number" id="cs_t" value="3" oninput="calcSimple()"></div>
+            </div>
+            <div class="calc-result" id="cs_res">Interest: ₱3,000.00 | Future Value: ₱23,000.00</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            Depositing <strong>₱20,000</strong> (<span class="math">P = 20,000</span>) at 5% simple interest per year (<span class="math">r = 0.05</span>) for 3 years (<span class="math">t = 3</span>):
+            <div class="calculation-line">FV = 20,000 × (1 + 0.05 × 3) = ₱23,000.00</div>
+        </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <h2>4. Compound Interest & Future Value</h2>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Compound Interest (Future Value of a Single Sum)</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc_compound')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">FV = P (1 + i)<sup>n</sup></span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Find the total Future Value (<em>FV</em>) of a single initial deposit (<em>P</em>) left to compound exponentially over <em>n</em> periods at periodic rate <em>i</em>.</p>
+        
+        <div id="calc_compound" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>Principal (P)</label><input type="number" id="cc_p" value="50000" oninput="calcCompound()"></div>
+                <div class="calc-field"><label>Rate per Period (i)</label><input type="number" step="0.001" id="cc_i" value="0.06" oninput="calcCompound()"></div>
+                <div class="calc-field"><label>Periods (n)</label><input type="number" id="cc_n" value="4" oninput="calcCompound()"></div>
+            </div>
+            <div class="calc-result" id="cc_res">Future Value: ₱63,123.85</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            Depositing <strong>₱50,000</strong> (<span class="math">P = 50,000</span>) at 6% interest compounded annually (<span class="math">i = 0.06</span>) for 4 years (<span class="math">n = 4</span>):
+            <div class="calculation-line">FV = 50,000 × (1.06)<sup>4</sup> = ₱63,123.85</div>
+        </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <h2>5. Annuities & Loans</h2>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Periodic Payment for Loans & Mortgages (Amortization)</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc2')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">R = P · [ i / (1 − (1 + i)<sup>−n</sup>) ]</span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Calculate the regular equal payment <em>R</em> needed to amortize a loan principal <em>P</em> over <em>n</em> periods.</p>
+
+        <div id="calc2" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>Loan (P)</label><input type="number" id="c2_p" value="1000000" oninput="calcLoan()"></div>
+                <div class="calc-field"><label>Annual Rate %</label><input type="number" step="0.1" id="c2_r" value="6" oninput="calcLoan()"></div>
+                <div class="calc-field"><label>Years</label><input type="number" id="c2_y" value="15" oninput="calcLoan()"></div>
+            </div>
+            <div class="calc-result" id="c2_res">Monthly Payment: ₱8,438.57</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            A <strong>₱1,000,000 mortgage</strong> (<span class="math">P = 1,000,000</span>) at 6% annual rate compounded monthly (<span class="math">i = 0.005</span>) over 15 years (<span class="math">n = 180</span>):
+            <div class="calculation-line">R = 1,000,000 × [ 0.005 / (1 − (1.005)<sup>−180</sup>) ] = ₱8,438.57 / month</div>
+        </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Future Value of an Ordinary Annuity</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc_annuity')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">FV = P · [ ((1 + i)<sup>n</sup> − 1) / i ]</span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Find total accumulated wealth from regular periodic deposits <em>P</em> over <em>n</em> compounding periods.</p>
+        
+        <div id="calc_annuity" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>Deposit (P)</label><input type="number" id="ca_p" value="2000" oninput="calcAnnuity()"></div>
+                <div class="calc-field"><label>Rate per Period (i)</label><input type="number" step="0.001" id="ca_i" value="0.015" oninput="calcAnnuity()"></div>
+                <div class="calc-field"><label>Periods (n)</label><input type="number" id="ca_n" value="40" oninput="calcAnnuity()"></div>
+            </div>
+            <div class="calc-result" id="ca_res">Future Value: ₱108,537.27</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            Saving <strong>₱2,000 quarterly</strong> (<span class="math">P = 2,000</span>) at 6% per annum compounded quarterly (<span class="math">i = 0.015</span>) for 10 years (<span class="math">n = 40</span>):
+            <div class="calculation-line">FV = 2,000 × [ ((1.015)<sup>40</sup> − 1) / 0.015 ] = ₱108,537.27</div>
+        </div>
+    </div>
+
+    <!-- DISCUSSION -->
+    <div class="discussion-section animate-on-scroll">
+        <h2 style="margin-top:0; border-left-color: var(--accent-green);">Unified Concept Integration</h2>
+        <p>Financial mathematics spans linear and exponential models derived directly from fundamental sequences:</p>
+        <ul style="padding-left: 20px; color: var(--text-sub);">
+            <li><strong>Arithmetic Growth & Simple Interest:</strong> Model linear growth where additions occur via a constant additive difference (<span class="math">d = P · r</span>).</li>
+            <li><strong>Geometric Growth & Compound Interest:</strong> Model exponential compounding where balances scale by a constant common ratio (<span class="math">r = 1 + i</span>).</li>
+            <li><strong>Annuities & Amortization:</strong> Aggregate multiple geometric payments or present values into unified series sums.</li>
+        </ul>
+    </div>
+
+    <!-- SUMMARY TABLE -->
+    <table class="animate-on-scroll">
+        <thead>
+            <tr>
+                <th>Context</th>
+                <th>Target</th>
+                <th>Formula</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Arithmetic Sequence</td>
+                <td>n-th Term (a<sub>n</sub>)</td>
+                <td><span class="math">a<sub>n</sub> = a<sub>1</sub> + (n − 1)d</span></td>
+            </tr>
+            <tr>
+                <td>Arithmetic Series</td>
+                <td>Sum of n Terms (S<sub>n</sub>)</td>
+                <td><span class="math">S<sub>n</sub> = [ n (a<sub>1</sub> + a<sub>n</sub>) ] / 2</span></td>
+            </tr>
+            <tr>
+                <td>Simple Interest Amount</td>
+                <td>Interest (I)</td>
+                <td><span class="math">I = P · r · t</span></td>
+            </tr>
+            <tr>
+                <td>Simple Interest Total</td>
+                <td>Future Value (FV)</td>
+                <td><span class="math">FV = P(1 + r · t)</span></td>
+            </tr>
+            <tr>
+                <td>Compound Interest Lump Sum</td>
+                <td>Future Value (FV)</td>
+                <td><span class="math">FV = P(1 + i)<sup>n</sup></span></td>
+            </tr>
+            <tr>
+                <td>Regular Investments (Annuity)</td>
+                <td>Future Value (FV)</td>
+                <td><span class="math">FV = P [ ((1+i)<sup>n</sup> − 1) / i ]</span></td>
+            </tr>
+            <tr>
+                <td>Mortgage / Amortization Loan</td>
+                <td>Payment (R)</td>
+                <td><span class="math">R = P [ i / (1 − (1+i)<sup>−n</sup>) ]</span></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<!-- UPDATED COMPOUND INTEREST CARD -->
-<div class="card animate-on-scroll">
-    <div class="card-title">
-        <span>Compound Interest (Future Value)</span>
-        <button class="interactive-btn" onclick="toggleCalc('calc_compound')">Try Live Calc</button>
-    </div>
-    <div class="formula-box">
-        <span class="math">FV = P (1 + i)<sup>n</sup></span>
-    </div>
-    <p class="usage-text"><strong>When to use:</strong> Calculate the future balance of a lump sum earning exponential compounding interest over <em>n</em> periods.</p>
-    
-    <div id="calc_compound" class="calc-panel">
-        <div class="calc-grid">
-            <div class="calc-field"><label>Principal (P)</label><input type="number" id="cc_p" value="50000" oninput="calcCompound()"></div>
-            <div class="calc-field"><label>Rate per Period (i)</label><input type="number" step="0.001" id="cc_i" value="0.06" oninput="calcCompound()"></div>
-            <div class="calc-field"><label>Periods (n)</label><input type="number" id="cc_n" value="4" oninput="calcCompound()"></div>
-        </div>
-        <div class="calc-result" id="cc_res">Future Value: ₱63,123.85</div>
-    </div>
+<script>
+    // SCROLL ANIMATION OBSERVER
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animate-visible');
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
 
-    <div class="example-box">
-        <strong>Real-World Example:</strong><br>
-        Depositing <strong>₱50,000</strong> (<span class="math">P = 50,000</span>) at 6% interest compounded annually (<span class="math">i = 0.06</span>) for 4 years (<span class="math">n = 4</span>):
-        <div class="calculation-line">FV = 50,000 × (1.06)<sup>4</sup> = ₱63,123.85</div>
-    </div>
-</div>
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    });
+
+    // TOGGLE CALCULATOR PANELS
+    function toggleCalc(id) {
+        const panel = document.getElementById(id);
+        panel.classList.toggle('active');
+    }
+
+    // LIVE CALCULATOR: Arithmetic Sequence (nth term)
+    function calcArithSeq() {
+        const a1 = parseFloat(document.getElementById('cas_a1').value) || 0;
+        const d = parseFloat(document.getElementById('cas_d').value) || 0;
+        const n = parseInt(document.getElementById('cas_n').value) || 0;
+        const res = a1 + (n - 1) * d;
+        document.getElementById('cas_res').innerHTML = `Result: a<sub>${n}</sub> = ${res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Arithmetic Series Sum
+    function calcArithSum() {
+        const a1 = parseFloat(document.getElementById('casum_a1').value) || 0;
+        const d = parseFloat(document.getElementById('casum_d').value) || 0;
+        const n = parseInt(document.getElementById('casum_n').value) || 0;
+        const res = (n * (2 * a1 + (n - 1) * d)) / 2;
+        document.getElementById('casum_res').innerHTML = `Result: S<sub>${n}</sub> = ${res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Geometric Sequence (nth term)
+    function calcSeq() {
+        const a1 = parseFloat(document.getElementById('c1_a1').value) || 0;
+        const r = parseFloat(document.getElementById('c1_r').value) || 0;
+        const n = parseInt(document.getElementById('c1_n').value) || 0;
+        const res = a1 * Math.pow(r, n - 1);
+        document.getElementById('c1_res').innerHTML = `Result: a<sub>${n}</sub> = ${res.toLocaleString(undefined, {maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Geometric Series Sum
+    function calcSum() {
+        const a1 = parseFloat(document.getElementById('csum_a1').value) || 0;
+        const r = parseFloat(document.getElementById('csum_r').value) || 0;
+        const n = parseInt(document.getElementById('csum_n').value) || 0;
+        let res = 0;
+        if (r === 1) {
+            res = a1 * n;
+        } else {
+            res = (a1 * (1 - Math.pow(r, n))) / (1 - r);
+        }
+        document.getElementById('csum_res').innerHTML = `Result: S<sub>${n}</sub> = ${res.toLocaleString(undefined, {maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Simple Interest & Future Value
+    function calcSimple() {
+        const p = parseFloat(document.getElementById('cs_p').value) || 0;
+        const ratePct = parseFloat(document.getElementById('cs_r').value) || 0;
+        const t = parseFloat(document.getElementById('cs_t').value) || 0;
+        const r = ratePct / 100;
+        const interest = p * r * t;
+        const total = p + interest;
+        document.getElementById('cs_res').innerHTML = `Interest: ₱${interest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} | Future Value: ₱${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Compound Interest (Future Value Single Sum)
+    function calcCompound() {
+        const p = parseFloat(document.getElementById('cc_p').value) || 0;
+        const i = parseFloat(document.getElementById('cc_i').value) || 0;
+        const n = parseInt(document.getElementById('cc_n').value) || 0;
+        const res = p * Math.pow(1 + i, n);
+        document.getElementById('cc_res').innerHTML = `Future Value: ₱${res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Loan Amortization Payment
+    function calcLoan() {
+        const p = parseFloat(document.getElementById('c2_p').value) || 0;
+        const annualR = parseFloat(document.getElementById('c2_r').value) || 0;
+        const y = parseInt(document.getElementById('c2_y').value) || 0;
+        
+        const i = (annualR / 100) / 12;
+        const n = y * 12;
+        
+        if (i === 0 || n === 0) return;
+        const r = p * (i / (1 - Math.pow(1 + i, -n)));
+        document.getElementById('c2_res').innerHTML = `Monthly Payment: ₱${r.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Future Value of Annuity
+    function calcAnnuity() {
+        const p = parseFloat(document.getElementById('ca_p').value) || 0;
+        const i = parseFloat(document.getElementById('ca_i').value) || 0;
+        const n = parseInt(document.getElementById('ca_n').value) || 0;
+        if (i === 0) return;
+        const res = p * ((Math.pow(1 + i, n) - 1) / i);
+        document.getElementById('ca_res').innerHTML = `Future Value: ₱${res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+</script>
+
+</body>
+</html>
