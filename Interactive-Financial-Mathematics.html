@@ -320,11 +320,66 @@
     <div class="header">
         <span class="badge">Grade 11 General Mathematics</span>
         <h1>Financial Mathematics: Interactive Guide</h1>
-        <p>Geometric Sequences, Compound Interest, Annuities & Amortization</p>
+        <p>Sequences, Series, Simple Interest, Compound Interest & Annuities</p>
     </div>
 
     <!-- SECTION 1 -->
-    <h2>1. Geometric Sequences & Series</h2>
+    <h2>1. Arithmetic Sequences & Series</h2>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Arithmetic Sequence (n-th Term)</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc_arith_seq')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">a<sub>n</sub> = a<sub>1</sub> + (n − 1)d</span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Calculate a specific term in a sequence that increases or decreases by a constant common difference (<em>d</em>) at equal steps.</p>
+
+        <div id="calc_arith_seq" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>a1 (First Term)</label><input type="number" id="cas_a1" value="5000" oninput="calcArithSeq()"></div>
+                <div class="calc-field"><label>d (Difference)</label><input type="number" id="cas_d" value="500" oninput="calcArithSeq()"></div>
+                <div class="calc-field"><label>n (Period)</label><input type="number" id="cas_n" value="6" oninput="calcArithSeq()"></div>
+            </div>
+            <div class="calc-result" id="cas_res">Result: a<sub>6</sub> = 7,500.00</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            A worker starts with a monthly salary of ₱5,000 (<span class="math">a<sub>1</sub> = 5,000</span>) and receives a annual fixed step increment of ₱500 (<span class="math">d = 500</span>). Salary in <strong>Year 6</strong> (<span class="math">n = 6</span>):
+            <div class="calculation-line">a<sub>6</sub> = 5,000 + (6 − 1)(500) = ₱7,500.00</div>
+        </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Sum of a Finite Arithmetic Series</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc_arith_sum')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">S<sub>n</sub> = [ n (a<sub>1</sub> + a<sub>n</sub>) ] / 2 &nbsp;&nbsp;or&nbsp;&nbsp; S<sub>n</sub> = [ n (2a<sub>1</sub> + (n − 1)d) ] / 2</span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Find the total cumulative sum of all terms in an arithmetic sequence across <em>n</em> periods.</p>
+
+        <div id="calc_arith_sum" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>a1 (First Term)</label><input type="number" id="casum_a1" value="5000" oninput="calcArithSum()"></div>
+                <div class="calc-field"><label>d (Difference)</label><input type="number" id="casum_d" value="500" oninput="calcArithSum()"></div>
+                <div class="calc-field"><label>n (Terms)</label><input type="number" id="casum_n" value="6" oninput="calcArithSum()"></div>
+            </div>
+            <div class="calc-result" id="casum_res">Result: S<sub>6</sub> = 37,500.00</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            Total cumulative earnings over 6 years with initial ₱5,000 salary and ₱500 annual increment:
+            <div class="calculation-line">S<sub>6</sub> = [ 6 × (2(5,000) + (6 − 1)(500)) ] / 2 = ₱37,500.00</div>
+        </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <h2>2. Geometric Sequences & Series</h2>
 
     <div class="card animate-on-scroll">
         <div class="card-title">
@@ -334,7 +389,7 @@
         <div class="formula-box">
             <span class="math">a<sub>n</sub> = a<sub>1</sub> · r<sup>n−1</sup></span>
         </div>
-        <p class="usage-text"><strong>When to use:</strong> Calculate a specific single term in a sequence that grows or decays by a constant factor (<em>r</em>) at equal time steps.</p>
+        <p class="usage-text"><strong>When to use:</strong> Calculate a specific single term in a sequence that grows or decays by a constant multiplier ratio (<em>r</em>).</p>
         
         <div id="calc1" class="calc-panel">
             <div class="calc-grid">
@@ -360,7 +415,7 @@
         <div class="formula-box">
             <span class="math">S<sub>n</sub> = [ a<sub>1</sub> (1 − r<sup>n</sup>) ] / (1 − r)</span>
         </div>
-        <p class="usage-text"><strong>When to use:</strong> Compute the grand cumulative sum of all terms in a geometric sequence from period 1 to <em>n</em>.</p>
+        <p class="usage-text"><strong>When to use:</strong> Compute the cumulative sum of all terms in a geometric sequence from period 1 to <em>n</em>.</p>
         
         <div id="calc_sum" class="calc-panel">
             <div class="calc-grid">
@@ -378,8 +433,37 @@
         </div>
     </div>
 
-    <!-- SECTION 2 -->
-    <h2>2. Single-Payment Compound Interest</h2>
+    <!-- SECTION 3 -->
+    <h2>3. Simple Interest</h2>
+
+    <div class="card animate-on-scroll">
+        <div class="card-title">
+            <span>Simple Interest & Total Amount</span>
+            <button class="interactive-btn" onclick="toggleCalc('calc_simple')">Try Live Calc</button>
+        </div>
+        <div class="formula-box">
+            <span class="math">I = P · r · t &nbsp;&nbsp;|&nbsp;&nbsp; A = P(1 + r · t)</span>
+        </div>
+        <p class="usage-text"><strong>When to use:</strong> Calculate linear interest (<em>I</em>) charged or earned strictly on the original principal balance (<em>P</em>) over time (<em>t</em> in years).</p>
+
+        <div id="calc_simple" class="calc-panel">
+            <div class="calc-grid">
+                <div class="calc-field"><label>Principal (P)</label><input type="number" id="cs_p" value="20000" oninput="calcSimple()"></div>
+                <div class="calc-field"><label>Annual Rate % (r)</label><input type="number" step="0.1" id="cs_r" value="5" oninput="calcSimple()"></div>
+                <div class="calc-field"><label>Years (t)</label><input type="number" id="cs_t" value="3" oninput="calcSimple()"></div>
+            </div>
+            <div class="calc-result" id="cs_res">Interest: ₱3,000.00 | Total: ₱23,000.00</div>
+        </div>
+
+        <div class="example-box">
+            <strong>Real-World Example:</strong><br>
+            Borrowing <strong>₱20,000</strong> (<span class="math">P = 20,000</span>) at 5% simple interest per year (<span class="math">r = 0.05</span>) for 3 years (<span class="math">t = 3</span>):
+            <div class="calculation-line">I = 20,000 × 0.05 × 3 = ₱3,000 &nbsp;⇒&nbsp; A = 20,000 + 3,000 = ₱23,000.00</div>
+        </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <h2>4. Single-Payment Compound Interest</h2>
 
     <div class="card animate-on-scroll">
         <div class="card-title">
@@ -389,7 +473,7 @@
         <div class="formula-box">
             <span class="math">A = P (1 + i)<sup>n</sup></span>
         </div>
-        <p class="usage-text"><strong>When to use:</strong> Find the future accumulated value of a single initial deposit (<em>P</em>) left to compound over <em>n</em> periods.</p>
+        <p class="usage-text"><strong>When to use:</strong> Find the future accumulated value of a single initial deposit (<em>P</em>) left to compound exponentially over <em>n</em> periods.</p>
         
         <div id="calc_compound" class="calc-panel">
             <div class="calc-grid">
@@ -407,8 +491,8 @@
         </div>
     </div>
 
-    <!-- SECTION 3 -->
-    <h2>3. Annuities & Loans</h2>
+    <!-- SECTION 5 -->
+    <h2>5. Annuities & Loans</h2>
 
     <div class="card animate-on-scroll">
         <div class="card-title">
@@ -465,11 +549,11 @@
     <!-- DISCUSSION -->
     <div class="discussion-section animate-on-scroll">
         <h2 style="margin-top:0; border-left-color: var(--accent-green);">Unified Concept Integration</h2>
-        <p>Financial formulas are anchored in <strong>geometric sequences</strong>. Every compounding period scales the balance by a constant common ratio <span class="math">r = 1 + i</span>.</p>
+        <p>Financial mathematics spans linear and exponential models derived directly from fundamental sequences:</p>
         <ul style="padding-left: 20px; color: var(--text-sub);">
-            <li><strong>Single Sums:</strong> Scale directly as individual geometric terms (<span class="math">A = P(r)<sup>n</sup></span>).</li>
-            <li><strong>Annuities:</strong> Sum multiple recurring deposits as a geometric series.</li>
-            <li><strong>Amortization:</strong> Equates loan principal to the present value of future repayments.</li>
+            <li><strong>Arithmetic Growth & Simple Interest:</strong> Model linear growth where additions occur via a constant additive difference (<span class="math">d = P · r</span>).</li>
+            <li><strong>Geometric Growth & Compound Interest:</strong> Model exponential compounding where balances scale by a constant common ratio (<span class="math">r = 1 + i</span>).</li>
+            <li><strong>Annuities & Amortization:</strong> Aggregate multiple geometric payments or present values into unified series sums.</li>
         </ul>
     </div>
 
@@ -483,6 +567,26 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td>Arithmetic Sequence</td>
+                <td>n-th Term (a<sub>n</sub>)</td>
+                <td><span class="math">a<sub>n</sub> = a<sub>1</sub> + (n − 1)d</span></td>
+            </tr>
+            <tr>
+                <td>Arithmetic Series</td>
+                <td>Sum of n Terms (S<sub>n</sub>)</td>
+                <td><span class="math">S<sub>n</sub> = [ n (a<sub>1</sub> + a<sub>n</sub>) ] / 2</span></td>
+            </tr>
+            <tr>
+                <td>Simple Interest</td>
+                <td>Interest Amount (I)</td>
+                <td><span class="math">I = P · r · t</span></td>
+            </tr>
+            <tr>
+                <td>Simple Interest Total</td>
+                <td>Total Amount (A)</td>
+                <td><span class="math">A = P(1 + r · t)</span></td>
+            </tr>
             <tr>
                 <td>Lump Sum Compound</td>
                 <td>Future Value (A)</td>
@@ -525,7 +629,25 @@
         panel.classList.toggle('active');
     }
 
-    // LIVE CALCULATOR 1: Geometric Sequence (nth term)
+    // LIVE CALCULATOR: Arithmetic Sequence (nth term)
+    function calcArithSeq() {
+        const a1 = parseFloat(document.getElementById('cas_a1').value) || 0;
+        const d = parseFloat(document.getElementById('cas_d').value) || 0;
+        const n = parseInt(document.getElementById('cas_n').value) || 0;
+        const res = a1 + (n - 1) * d;
+        document.getElementById('cas_res').innerHTML = `Result: a<sub>${n}</sub> = ${res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Arithmetic Series Sum
+    function calcArithSum() {
+        const a1 = parseFloat(document.getElementById('casum_a1').value) || 0;
+        const d = parseFloat(document.getElementById('casum_d').value) || 0;
+        const n = parseInt(document.getElementById('casum_n').value) || 0;
+        const res = (n * (2 * a1 + (n - 1) * d)) / 2;
+        document.getElementById('casum_res').innerHTML = `Result: S<sub>${n}</sub> = ${res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Geometric Sequence (nth term)
     function calcSeq() {
         const a1 = parseFloat(document.getElementById('c1_a1').value) || 0;
         const r = parseFloat(document.getElementById('c1_r').value) || 0;
@@ -534,7 +656,7 @@
         document.getElementById('c1_res').innerHTML = `Result: a<sub>${n}</sub> = ${res.toLocaleString(undefined, {maximumFractionDigits: 2})}`;
     }
 
-    // LIVE CALCULATOR 2: Geometric Series Sum
+    // LIVE CALCULATOR: Geometric Series Sum
     function calcSum() {
         const a1 = parseFloat(document.getElementById('csum_a1').value) || 0;
         const r = parseFloat(document.getElementById('csum_r').value) || 0;
@@ -548,7 +670,18 @@
         document.getElementById('csum_res').innerHTML = `Result: S<sub>${n}</sub> = ${res.toLocaleString(undefined, {maximumFractionDigits: 2})}`;
     }
 
-    // LIVE CALCULATOR 3: Compound Interest (Single Sum)
+    // LIVE CALCULATOR: Simple Interest
+    function calcSimple() {
+        const p = parseFloat(document.getElementById('cs_p').value) || 0;
+        const ratePct = parseFloat(document.getElementById('cs_r').value) || 0;
+        const t = parseFloat(document.getElementById('cs_t').value) || 0;
+        const r = ratePct / 100;
+        const interest = p * r * t;
+        const total = p + interest;
+        document.getElementById('cs_res').innerHTML = `Interest: ₱${interest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} | Total: ₱${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    }
+
+    // LIVE CALCULATOR: Compound Interest (Single Sum)
     function calcCompound() {
         const p = parseFloat(document.getElementById('cc_p').value) || 0;
         const i = parseFloat(document.getElementById('cc_i').value) || 0;
@@ -557,7 +690,7 @@
         document.getElementById('cc_res').innerHTML = `Future Value: ₱${res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
     }
 
-    // LIVE CALCULATOR 4: Loan Amortization Payment
+    // LIVE CALCULATOR: Loan Amortization Payment
     function calcLoan() {
         const p = parseFloat(document.getElementById('c2_p').value) || 0;
         const annualR = parseFloat(document.getElementById('c2_r').value) || 0;
@@ -571,7 +704,7 @@
         document.getElementById('c2_res').innerHTML = `Monthly Payment: ₱${r.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
     }
 
-    // LIVE CALCULATOR 5: Future Value of Annuity
+    // LIVE CALCULATOR: Future Value of Annuity
     function calcAnnuity() {
         const p = parseFloat(document.getElementById('ca_p').value) || 0;
         const i = parseFloat(document.getElementById('ca_i').value) || 0;
